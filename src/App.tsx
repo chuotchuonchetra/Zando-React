@@ -1,10 +1,10 @@
 import "./App.css";
+import AppRoutes from "./routes/AppRoutes";
 
 function App() {
   return (
     <>
-      <div className="bg-amber-300 ">this is kokoma</div>
-      <p>Testig</p>
+      <AppRoutes />
     </>
   );
 }
