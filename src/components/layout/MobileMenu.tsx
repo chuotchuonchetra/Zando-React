@@ -11,7 +11,10 @@ const MobileMenu = ({ open, onClose }: Props) => {
 
   return (
     <div className="fixed inset-0 z-50 bg-black/40">
-      <div className="absolute right-0 top-0 h-full w-64 bg-white p-6">
+      <div
+        className={`absolute right-0 top-0 h-full bg-white p-6 ${
+          open ? "w-64" : "w-0"
+        } transition-width duration-500 ease-in-out`}>
         <button className="absolute top-4 right-4" onClick={onClose}>
           <X size={24} />
         </button>

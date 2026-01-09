@@ -1,7 +1,9 @@
+import ProductList from "../components/product/ProductList";
+
 const Home = () => {
   return (
-    <div>
-      <h1>Welcome to the Home Page</h1>
+    <div className="container mx-auto px-8 py-8">
+      <ProductList />
     </div>
   );
 };

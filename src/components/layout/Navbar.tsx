@@ -2,10 +2,14 @@ import { Link } from "react-router-dom";
 import { ShoppingBag, Menu, Bell, Heart } from "lucide-react";
 import { useState } from "react";
 import MobileMenu from "./MobileMenu.tsx";
+import Cart from "../../pages/Cart.tsx";
+import { useSelector } from "react-redux";
+import type { RootState } from "../../store/store.ts";
 
 const Navbar = () => {
-  const [open, setOpen] = useState(false);
-
+  const [open, setOpen] = useState<boolean>(false);
+  const [cartOpen, setCartOpen] = useState<boolean>(false);
+  const cart = useSelector((state: RootState) => state.cart.products);
   return (
     <header className="sticky top-0 z-50 bg-white border-b px-10">
       <div className="container mx-auto px-4">
@@ -37,12 +41,12 @@ const Navbar = () => {
             </div>
             <Bell size={24} />
             <Heart size={24} />
-            <Link to="/cart" className="relative">
+            <button className="relative" onClick={() => setCartOpen(true)}>
               <ShoppingBag size={22} />
               <span className="absolute -top-2 -right-2 bg-black text-white text-xs rounded-full px-1">
                 0
               </span>
-            </Link>
+            </button>
 
             {/* Mobile Menu Button */}
             <button className="md:hidden" onClick={() => setOpen(true)}>
@@ -64,6 +68,11 @@ const Navbar = () => {
 
       {/* Mobile Menu */}
       <MobileMenu open={open} onClose={() => setOpen(false)} />
+      <Cart
+        isOpen={cartOpen}
+        onClose={() => setCartOpen(false)}
+        products={cart}
+      />
     </header>
   );
 };
