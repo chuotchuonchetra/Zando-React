@@ -29,3 +29,20 @@ export interface Collection {
   title: string;
   products: Product[];
 }
+
+export interface ICartItem {
+  id: number;
+  cartItemId: string;
+  selectedColor: string;
+  selectedSize: string;
+  quantity: number;
+  name: string;
+  price: number;
+  oldPrice?: number;
+  discountPercent?: number;
+  thumbnail: string;
+  category: string;
+  code: number;
+  brand: string;
+  color: string;
+}

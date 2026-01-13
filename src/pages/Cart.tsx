@@ -1,10 +1,10 @@
 import { Heart, Trash, X } from "lucide-react";
-import type { Product } from "../types/product.type";
+import type { ICartItem } from "../types/product.type";
 
 interface Props {
   isOpen: boolean;
   onClose: () => void;
-  products: Product[];
+  products: ICartItem[];
 }
 
 const Cart: React.FC<Props> = ({ isOpen, onClose, products }) => {
@@ -53,8 +53,8 @@ const Cart: React.FC<Props> = ({ isOpen, onClose, products }) => {
               </div>
             ) : (
               <div className="m-2  ">
-                {products?.map((product) => (
-                  <div className="p-2">
+                {products?.map((product, idnex) => (
+                  <div className="p-2" key={idnex}>
                     <div className="flex gap-4 ">
                       <div className="">
                         <img
@@ -74,7 +74,7 @@ const Cart: React.FC<Props> = ({ isOpen, onClose, products }) => {
                         <div className="flex flex-col gap-2 ">
                           <p>{product.name}</p>
                           <p>
-                            {product.code} - {product.colorsAvailable[0].color}
+                            {product.code} - {product.color}
                           </p>
                           <div className="flex justify-between gap-4 ">
                             <div className="">
