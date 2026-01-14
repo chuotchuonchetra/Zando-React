@@ -40,6 +40,7 @@ export interface ICartItem {
   price: number;
   oldPrice?: number;
   discountPercent?: number;
+  sizesAvailable: SizeStock[];
   thumbnail: string;
   category: string;
   code: number;

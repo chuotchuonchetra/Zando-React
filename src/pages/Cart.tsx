@@ -83,11 +83,14 @@ const Cart: React.FC<Props> = ({ isOpen, onClose, products }) => {
                               </label>
                               <select
                                 id="size"
+                                value={product.selectedSize}
+                                onChange={() => {}}
                                 className="rounded-sm block w-full px-4 py-1.5 bg-neutral-secondary-medium border border-gray-400 text-heading text-sm rounded-base focus:ring-brand focus:border-brand shadow-xs placeholder:text-body">
-                                <option value="M">S</option>
-                                <option value="M">M</option>
-                                <option value="L">L</option>
-                                <option value="XL">XL</option>
+                                {product.sizesAvailable.map((size) => (
+                                  <option key={size.size} value={size.size}>
+                                    {size.size}
+                                  </option>
+                                ))}
                               </select>
                             </div>
                             <div className="">
@@ -96,11 +99,23 @@ const Cart: React.FC<Props> = ({ isOpen, onClose, products }) => {
                               </label>
                               <select
                                 id="quantity"
+                                value={product.quantity}
+                                onChange={() => {}}
                                 className="rounded-sm block w-full px-4 py-1.5 bg-neutral-secondary-medium border border-gray-400 text-heading text-sm rounded-base focus:ring-brand focus:border-brand shadow-xs placeholder:text-body">
-                                <option value="1">1</option>
-                                <option value="2">2</option>
-                                <option value="3">3</option>
-                                <option value="4">4</option>
+                                {Array.from(
+                                  {
+                                    // Provide a fallback of 0 so length is never undefined
+                                    length:
+                                      product.sizesAvailable.find(
+                                        (s) => s.size === product.selectedSize
+                                      )?.quantity || 0,
+                                  },
+                                  (_, i) => (
+                                    <option key={i + 1} value={i + 1}>
+                                      {i + 1}
+                                    </option>
+                                  )
+                                )}
                               </select>
                             </div>
                           </div>

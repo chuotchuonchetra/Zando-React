@@ -33,9 +33,10 @@ const ProductDetail = () => {
 
   const [quantity, setQuantity] = useState<number>(1);
   const [selectedSize, setSelectedSize] = useState<string>("");
-
+  const [selectSizeError, setSelectSizeError] = useState<string>("");
   const handleQuantity = (operator: string) => {
     if (quantity < 1) return;
+
     if (operator === "add") {
       setQuantity(quantity + 1);
     } else if (operator === "subtract") {
@@ -47,11 +48,12 @@ const ProductDetail = () => {
     setSelectedSize(size);
   };
   const handleAddToCart = () => {
-    // Validation: Ensure a size is selected if needed
-    // if (!selectedSize) {
-    //   alert("Please select a size");
-    //   return;
-    // }
+    if (!selectedSize) {
+      setSelectSizeError("Please select a size");
+      return;
+    } else {
+      setSelectSizeError("");
+    }
 
     // 2. Construct the item directly in the function
 
@@ -72,31 +74,12 @@ const ProductDetail = () => {
       code: product!.code,
       brand: product!.brand,
       color: productDetail?.color || "",
+      sizesAvailable: productDetail!.sizesAvailable,
     };
     console.log(itemToDispatch);
     // 3. Dispatch the object directly, not the state variable
     dispatch(addToCart(itemToDispatch));
   };
-
-  // const handleAddToCart = () => {
-  //   setCartItem({
-  //     id: 101,
-  //     cartItemId: "uuid-001-abc",
-  //     selectedColor: "Midnight Blue",
-  //     selectedSize: "L",
-  //     quantity: 1,
-  //     name: "Premium Cotton Crewneck",
-  //     price: 45.0,
-  //     oldPrice: 60.0,
-  //     discountPercent: 25,
-  //     thumbnail: "",
-  //     category: "Apparel",
-  //     code: 5001,
-  //     brand: "UrbanThread",
-  //     color: "Blue",
-  //   });
-  //   dispatch(addToCart(cartItem));
-  // };
 
   return (
     <div>
@@ -190,6 +173,7 @@ const ProductDetail = () => {
                   </button>
                 ))}
               </div>
+              <div className="size-message-error">{selectSizeError}</div>
             </div>
 
             {/* Quantity */}
